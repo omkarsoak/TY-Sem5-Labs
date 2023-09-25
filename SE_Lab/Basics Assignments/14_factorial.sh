@@ -1,15 +1,25 @@
 #!/bin/bash
 
 calculate_factorial() {
-    local num=$1
-    local result=1
+    local n=$1
 
-    for ((i = 2; i <= num; i++)); 
-    do
-        result=$((result * i))
+    if [ $n -lt 0 ]; then
+        echo "Error: Factorial is not defined for negative numbers."
+        return
+    fi
+
+    if [ $n -eq 0 ]; then
+        echo "Factorial of 0 is 1"
+        return
+    fi
+
+    result=$(echo "1" | bc)
+
+    for ((i = 1; i <= n; i++)); do
+        result=$(echo "$result * $i" | bc)
     done
 
-    echo "Factorial of $num is: $result"
+    echo "Factorial of $n is $result"
 }
 
 read -p "Enter the number: " number
@@ -21,8 +31,8 @@ if ! [[ "$number" =~ ^[0-9]+$ ]]; then
 fi
 
 # Check if the input number is greater than 24
-if [ "$number" -gt 24 ]; then
-    echo "Error: Input number is greater than 24. Factorial cannot be calculated."
+if [ "$number" -gt 200 ]; then
+    echo "Error: Input number is greater than 200. Factorial cannot be calculated."
     exit 1
 fi
 
