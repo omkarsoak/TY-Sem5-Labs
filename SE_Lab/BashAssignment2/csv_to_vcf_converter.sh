@@ -9,7 +9,10 @@ input_csv="$1"
 output_vcf="output.vcf"
 
 #checks for the number of columns and then makes vcard accordingly
+#NR = number of records
+#NF = number of fields
 
+#awk -F',': Invokes AWK and sets the field separator as a comma.
 awk -F',' 'NR==1 {
     for (i=1; i<=NF; i++) {
         columns[i] = $i
